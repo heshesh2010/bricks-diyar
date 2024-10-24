@@ -11,7 +11,9 @@ final class {{name.pascalCase()}}InitialState extends {{name.pascalCase()}}State
 final class {{name.pascalCase()}}LoadingState extends {{name.pascalCase()}}State {}
 
 final class {{name.pascalCase()}}ReadyState extends {{name.pascalCase()}}State {
-  {{name.pascalCase()}}ReadyState();
+  {{name.pascalCase()}}ReadyState(this.response);
+    BaseEntity<{{name.pascalCase()}}Entity> response;
+
 }
 
 abstract class {{name.pascalCase()}}State {}

@@ -7,12 +7,13 @@ import "../../../shared/entity/base_entity.dart";
 import '../../../sample/domain/use_cases/get_{{name.snakeCase()}}.dart';
 import '../../domain/entities/{{name.snakeCase()}}_entity.dart';
 import '../../data/models/request/{{name.snakeCase()}}_params.dart';
+import '../../../../features/{{name.snakeCase()}}/domain/use_cases/get_{{name.snakeCase()}}.dart';
+import '../../../../features/{{name.snakeCase()}}/domain/entities/{{name.snakeCase()}}_entity.dart';
 
 part '{{name.snakeCase()}}_state.dart';
 
 
-import 'package:swa_app/features/{{name.snakeCase()}}/domain/use_cases/get_{{name.snakeCase()}}.dart';
-import 'package:swa_app/features/{{name.snakeCase()}}/domain/entities/{{name.snakeCase()}}_entity.dart';
+
 
 
 @injectable
@@ -25,7 +26,7 @@ class {{name.pascalCase()}}Cubit extends Cubit<{{name.pascalCase()}}State> {
     emit({{name.pascalCase()}}LoadingState());
 
     final CustomResponseType<BaseEntity<{{name.pascalCase()}}Entity>> eitherPackagesOrFailure =
-        await Get{{name.pascalCase()}}UseCase();
+        await get{{name.pascalCase()}}UseCase({{name.camelCase()}}Model);
 
     eitherPackagesOrFailure.fold((Failure failure) {
       final FailureToMassage massage = FailureToMassage();
