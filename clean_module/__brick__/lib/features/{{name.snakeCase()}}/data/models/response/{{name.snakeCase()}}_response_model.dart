@@ -1,7 +1,5 @@
 import "dart:convert";
 
-import "../../../domain/entities/{{name.snakeCase()}}_entity.dart";
-
 import 'package:json_annotation/json_annotation.dart';
 import '../../../../shared/entity/base_entity.dart';
 import '../../../domain/entities/{{name.snakeCase()}}_entity.dart';

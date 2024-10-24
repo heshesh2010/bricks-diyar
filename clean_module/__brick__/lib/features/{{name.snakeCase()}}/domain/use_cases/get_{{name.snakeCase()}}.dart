@@ -11,7 +11,7 @@ import '../../../../core/network/base_handling.dart';
 
 
 @injectable
-class Get{{name.pascalCase()}}UseCase implements UseCase<BaseEntity<{{name.pascalCase()}}Entity>, {{name.pascalCase()}}Params> {
+class Get{{name.pascalCase()}}UseCase implements UseCase<BaseEntity<{{name.pascalCase()}}Entity>, {{name.pascalCase()}}RequestModel> {
     Get{{name.pascalCase()}}UseCase ({required this.{{name.camelCase()}}Repository});
 
   final {{name.pascalCase()}}Repository {{name.camelCase()}}Repository;
@@ -26,7 +26,7 @@ class Get{{name.pascalCase()}}UseCase implements UseCase<BaseEntity<{{name.pasca
     throw UnimplementedError();
     {{/addTemplateCode}}
     {{#addTemplateCode}}
-    return {{name.camelCase()}}Repository.get{{name.pascalCase()}}({{name.camelCase()}}Params: params);
+    return {{name.camelCase()}}Repository.get{{name.pascalCase()}}({{name.camelCase()}}RequestModel: params);
     {{/addTemplateCode}}
   }
 }
