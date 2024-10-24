@@ -53,28 +53,3 @@ class {{name.pascalCase()}}Cubit extends Cubit<{{name.pascalCase()}}State> {
 
 
 
-
-
-import 'package:injectable/injectable.dart';
-
-import '../../../../core/network/base_handling.dart';
-import '../../../shared/entity/base_entity.dart';
-import '../../domain/repositories/{{name.snakeCase()}}_repository.dart';
-import '../data_sources/{{name.snakeCase()}}_sources.dart';
-import '../models/request/{{name.snakeCase()}}_request_model.dart';
-import '../models/response/{{name.snakeCase()}}_response_model.dart';
-
-@Injectable(as: {{name.pascalCase()}}Repository)
-class {{name.pascalCase()}}RepositoryImp implements {{name.pascalCase()}}Repository {
-  {{name.pascalCase()}}RepositoryImp({
-    required this.homeProfileRemoteDataSource,
-  });
-
-  final {{name.pascalCase()}}RemoteDataSource homeProfileRemoteDataSource;
-
-  Future<CustomResponseType<BaseEntity<{{name.pascalCase()}}Model>>> get{{name.pascalCase()}}(
-      {required {{name.pascalCase()}}RequestModel homeProfileRequestModel}) async {
-    return await homeProfileRemoteDataSource.getProfile(
-        homeProfileRequestModel: homeProfileRequestModel);
-  }
-}

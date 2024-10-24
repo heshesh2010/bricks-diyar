@@ -19,14 +19,14 @@ class Get{{name.pascalCase()}}UseCase implements UseCase<BaseEntity<{{name.pasca
 
   @override
   Future<CustomResponseType<BaseEntity<{{name.pascalCase()}}Entity>>> call(
-    {{name.pascalCase()}}Params params,
+    {{name.pascalCase()}}RequestModel params,
   ) {
     {{^addTemplateCode}}
     // TODO: implement call
     throw UnimplementedError();
     {{/addTemplateCode}}
     {{#addTemplateCode}}
-    return {{name.camelCase()}}Repository.get{{name.pascalCase()}}({{name.camelCase()}}RequestModel: params);
+    return {{name.camelCase()}}Repository.get{{name.pascalCase()}}({{name.camelCase()}}Params: params);
     {{/addTemplateCode}}
   }
 }

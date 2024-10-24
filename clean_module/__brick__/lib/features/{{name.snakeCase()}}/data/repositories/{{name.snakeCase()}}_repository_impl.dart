@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/network/base_handling.dart';
 import '../../../shared/entity/base_entity.dart';
 import '../../domain/repositories/{{name.snakeCase()}}_repository.dart';
-import '../data_sources/{{name.snakeCase()}}_data_sources.dart';
 import '../models/request/{{name.snakeCase()}}_request_model.dart';
 import '../models/response/{{name.snakeCase()}}_response_model.dart';
 
@@ -19,9 +18,9 @@ class {{name.pascalCase()}}RepositoryImp implements {{name.pascalCase()}}Reposit
   final {{name.pascalCase()}}RemoteDataSource {{name.camelCase()}}RemoteDataSource;
 
   Future<CustomResponseType<BaseEntity<{{name.pascalCase()}}Model>>> get{{name.pascalCase()}}(
-      {required {{name.pascalCase()}}RequestModel {{name.camelCase()}}RequestModel}) async {
+      {required {{name.pascalCase()}}RequestModel {{name.camelCase()}}Params}) async {
     return await {{name.camelCase()}}RemoteDataSource.get{{name.pascalCase()}}(
-        {{name.camelCase()}}RequestModel: {{name.camelCase()}}RequestModel);
+        {{name.camelCase()}}Params: {{name.camelCase()}}Params);
   }
 }
 

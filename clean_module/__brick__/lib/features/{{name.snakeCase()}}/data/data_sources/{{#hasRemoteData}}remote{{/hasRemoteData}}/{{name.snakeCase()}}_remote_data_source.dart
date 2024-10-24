@@ -1,51 +1,37 @@
-import "../../../../../core/adapters/dio_adapter.dart";
-{{#addTemplateCode}}import "../../models/request/{{name.snakeCase()}}_params.dart";
-import "../../models/response/{{name.snakeCase()}}_model.dart";{{/addTemplateCode}}
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import "../../../../../core/network/api/network_apis_constants.dart";
 
-/// Remote data source for the {{name.pascalCase()}} collection
+import '../../../../core/network/api/network_apis_constants.dart';
+import '../../../../core/network/base_handling.dart';
+import '../../../../core/network/network_helper.dart';
+import '../../../../error/failure.dart';
+import '../models/request/{{name.snakeCase()}}_request_model.dart';
+import '../models/response/{{name.snakeCase()}}_response_model.dart';
+
 abstract class {{name.pascalCase()}}RemoteDataSource {
-
-  {{#areCommentsOn}}/*
-  A remote data source is responsible for abstracting the API layer from the data layer. 
-  The data source's main functions are:
-    Data Retrieval: It fetches data from the specified source. This could involve making a network request to an API, querying a database, or reading a file.
-    Data Storage: It saves data back to the source. This could involve making a POST request to an API, executing an INSERT query on a database, or writing to a file.
-    Data Conversion: It often converts the data into a format that the rest of the application can use. This could involve deserializing JSON from an API into objects, or mapping database rows to objects.
-  */{{/areCommentsOn}}
-
-  {{#addTemplateCode}}Future<{{name.pascalCase()}}ResponseModel> get{{name.pascalCase()}}({
-    required {{name.pascalCase()}}Params {{name.camelCase()}}Params,
-  });{{/addTemplateCode}}
-  
+  Future<CustomResponseType<{{name.pascalCase()}}ResponseModel>> get{{name.pascalCase()}}(
+      {required {{name.pascalCase()}}RequestModel {{name.camelCase()}}RequestModel});
 }
 
-/// Remote data source for the {{name.pascalCase()}} collection
 @Injectable(as: {{name.pascalCase()}}RemoteDataSource)
-class {{name.pascalCase()}}RemoteDataSourceImpl implements {{name.pascalCase()}}RemoteDataSource {
-  /// Remote data source for the {{name.pascalCase()}} collection
- {{name.pascalCase()}}RemoteDataSourceImpl({required this.dio});
+class {{name.pascalCase()}}DataSourceImpl implements {{name.pascalCase()}}RemoteDataSource {
+  {{name.pascalCase()}}DataSourceImpl(this.networkHelper);
+  final NetworkHelper networkHelper;
 
-  /// Dio adapter instance
-  final DioAdapter dio;
+  @override
+  Future<CustomResponseType<{{name.pascalCase()}}ResponseModel>> get{{name.pascalCase()}}(
+      {required {{name.pascalCase()}}RequestModel {{name.camelCase()}}RequestModel}) async {
+    ({dynamic response, bool success}) result = await networkHelper
+        .post(path: ApiConstants.profile, data: <String, String>{
+      "email": {{name.camelCase()}}RequestModel.email ?? "",
+      "lang": {{name.camelCase()}}RequestModel.lang ?? "a"
+    });
 
-  {{#areCommentsOn}}/*
-  The remote data source implementation is responsible for making the actual API requests. 
-  It is responsible for converting the data into a format that the rest of the application can use. This could involve deserializing JSON from an API into objects, or mapping database rows to objects.
-  */{{/areCommentsOn}}
-
-  {{#addTemplateCode}}@override
-  Future<{{name.pascalCase()}}ResponseModel> get{{name.pascalCase()}}({
-    required {{name.pascalCase()}}Params {{name.camelCase()}}Params,
-  }) async {
-    final response = await dio.get(
-      ApiConstants.   ,
-    
-    );
-
-   return {{name.pascalCase()}}ResponseModel.fromJson( response.data);
+    if (result.success) {
    
-  }{{/addTemplateCode}}
- 
+      return right({{name.pascalCase()}}ResponseModel.fromJson(result.response));
+    } else {
+      return left(ServerFailure(message: result.response as String));
+    }
+  }
 }
