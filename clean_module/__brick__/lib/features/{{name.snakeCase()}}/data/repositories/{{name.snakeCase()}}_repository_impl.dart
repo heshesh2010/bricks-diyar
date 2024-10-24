@@ -20,7 +20,7 @@ class {{name.pascalCase()}}RepositoryImp implements {{name.pascalCase()}}Reposit
   Future<CustomResponseType<BaseEntity<{{name.pascalCase()}}Model>>> get{{name.pascalCase()}}(
       {required {{name.pascalCase()}}RequestModel {{name.camelCase()}}Params}) async {
     return await {{name.camelCase()}}RemoteDataSource.get{{name.pascalCase()}}(
-        {{name.camelCase()}}Params: {{name.camelCase()}}Params);
+        {{name.camelCase()}}RequestModel: {{name.camelCase()}}Params);
   }
 }
 
