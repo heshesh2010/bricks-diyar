@@ -1,8 +1,8 @@
 {{#addTemplateCode}}import "package:dartz/dartz.dart";
 
-import "../../../../core/errors/failure.dart";
-import '../features/shared/entity/base_entity.dart';
-import '../../core/network/base_handling.dart';
+
+import "../../../../core/network/base_handling.dart";
+import "../../../shared/entity/base_entity.dart";
 
 import "../../data/models/request/{{name.snakeCase()}}_params.dart";
 import "../entities/{{name.snakeCase()}}_entity.dart";{{/addTemplateCode}}
@@ -15,7 +15,7 @@ abstract class {{name.pascalCase()}}Repository {
   abstracting the data layer from the business logic layer. 
   */{{/areCommentsOn}}
 
-  {{#addTemplateCode}}Future<CustomResponseType<BaseEntity< {{name.pascalCase()}}Entity>>>> get{{name.pascalCase()}}({
+  {{#addTemplateCode}}Future<CustomResponseType<BaseEntity< {{name.pascalCase()}}Entity>>> get{{name.pascalCase()}}({
     required {{name.pascalCase()}}Params {{name.camelCase()}}Params,
   });{{/addTemplateCode}}
 }

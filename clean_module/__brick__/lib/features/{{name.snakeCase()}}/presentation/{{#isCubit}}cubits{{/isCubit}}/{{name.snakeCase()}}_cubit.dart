@@ -1,11 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/network/base_handling.dart';
+import "../../../../core/network/base_handling.dart";
 import '../../../../error/failure.dart';
-import '../../../../features/shared/entity/base_entity.dart';
+import "../../../shared/entity/base_entity.dart";
+import '../../../sample/domain/use_cases/get_{{name.snakeCase()}}.dart';
+import '../../domain/entities/{{name.snakeCase()}}_entity.dart';
+import '../../data/models/request/{{name.snakeCase()}}_params.dart';
 
 part '{{name.snakeCase()}}_state.dart';
+
+
+import 'package:swa_app/features/{{name.snakeCase()}}/domain/use_cases/get_{{name.snakeCase()}}.dart';
+import 'package:swa_app/features/{{name.snakeCase()}}/domain/entities/{{name.snakeCase()}}_entity.dart';
+
 
 @injectable
 class {{name.pascalCase()}}Cubit extends Cubit<{{name.pascalCase()}}State> {
