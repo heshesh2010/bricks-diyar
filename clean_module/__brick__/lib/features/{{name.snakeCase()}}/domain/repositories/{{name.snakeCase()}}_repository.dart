@@ -4,7 +4,7 @@
 import "../../../../core/network/base_handling.dart";
 import "../../../shared/entity/base_entity.dart";
 
-import "../../data/models/request/{{name.snakeCase()}}_params.dart";
+import "../../data/models/request/{{name.snakeCase()}}_request_model.dart";
 import "../entities/{{name.snakeCase()}}_entity.dart";{{/addTemplateCode}}
 
 /// Data operations for the {{name.pascalCase()}} collection

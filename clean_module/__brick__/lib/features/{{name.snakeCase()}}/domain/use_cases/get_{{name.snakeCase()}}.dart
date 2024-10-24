@@ -1,7 +1,5 @@
-import "package:dartz/dartz.dart";
-import "../../../../core/errors/failure.dart";
 import "../../../../core/domain/usecase/base_usecase.dart";
-import "../../data/models/request/{{name.snakeCase()}}_params.dart";
+import "../../data/models/request/{{name.snakeCase()}}_request_model.dart";
 import "../../domain/entities/{{name.snakeCase()}}_entity.dart";
 import "../../domain/repositories/{{name.snakeCase()}}_repository.dart";
 
