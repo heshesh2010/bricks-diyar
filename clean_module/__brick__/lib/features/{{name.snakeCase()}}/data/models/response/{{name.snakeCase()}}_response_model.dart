@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../../../shared/entity/base_entity.dart';
 import '../../../domain/entities/{{name.snakeCase()}}_entity.dart';
 
-part '{{name.snakeCase()}}_model.g.dart';
+part '{{name.snakeCase()}}_response_model.g.dart';
 
 
 
@@ -21,13 +21,9 @@ part '{{name.snakeCase()}}_model.g.dart';
 @JsonSerializable()
 class {{name.pascalCase()}}Model extends {{name.pascalCase()}}Entity {
   {{name.pascalCase()}}Model(
-      {required super.email,
-      required super.lang,
-      required super.name,
-      required super.photo,
-      required super.company,
-      required super.profiles,
-      required super.socialMedia});
+      {
+   required super.var1,
+    required super.var2,});
 
   factory {{name.pascalCase()}}Model.fromJson(Map<String, dynamic> json) =>
       _${{name.pascalCase()}}ModelFromJson(json);
@@ -45,8 +41,8 @@ class {{name.pascalCase()}}ResponseModel extends BaseEntity<{{name.pascalCase()}
     super.hasMorePages,
   });
 
-  factory HomeProfileResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$HomeProfileResponseModelFromJson(json);
+  factory {{name.pascalCase()}}ResponseModel.fromJson(Map<String, dynamic> json) =>
+      _${{name.pascalCase()}}ResponseModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$HomeProfileResponseModelToJson(this);
+  Map<String, dynamic> toJson() => _${{name.pascalCase()}}ResponseModelToJson(this);
 }

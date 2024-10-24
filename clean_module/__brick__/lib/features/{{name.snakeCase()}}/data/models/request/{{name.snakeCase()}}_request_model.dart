@@ -16,7 +16,7 @@ class {{name.pascalCase()}}RequestModel {
   {{name.pascalCase()}}RequestModel({required this.email, required this.lang});
 
   factory {{name.pascalCase()}}RequestModel.fromJson(Map<String, dynamic> json) =>
-      _$HomeProfileRequestModelFromJson(json);
+      _${{name.pascalCase()}}RequestModelFromJson(json);
   final String? email;
   final String? lang;
 
