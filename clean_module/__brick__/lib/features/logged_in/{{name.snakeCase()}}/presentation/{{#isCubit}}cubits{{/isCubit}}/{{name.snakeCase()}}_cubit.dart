@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import "../../../../../core/network/base_handling.dart";
 import '../../../../../error/failure.dart';
-import "../../shared/entity/base_entity.dart";
+import "../../../../shared/entity/base_entity.dart";
 import '../../domain/use_cases/get_{{name.snakeCase()}}.dart';
 import '../../domain/entities/{{name.snakeCase()}}_entity.dart';
 import '../../data/models/request/{{name.snakeCase()}}_request_model.dart';
