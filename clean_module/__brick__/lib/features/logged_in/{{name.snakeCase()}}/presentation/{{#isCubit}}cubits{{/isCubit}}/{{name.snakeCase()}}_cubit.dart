@@ -1,14 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import "../../../../core/network/base_handling.dart";
-import '../../../../error/failure.dart';
-import "../../../shared/entity/base_entity.dart";
-import '../../../sample/domain/use_cases/get_{{name.snakeCase()}}.dart';
-import '../../domain/entities/{{name.snakeCase()}}_entity.dart';
-import '../../../../features/{{name.snakeCase()}}/domain/use_cases/get_{{name.snakeCase()}}.dart';
-import '../../../../features/{{name.snakeCase()}}/domain/entities/{{name.snakeCase()}}_entity.dart';
-import '../../data/models/request/{{name.snakeCase()}}_request_model.dart';
+import "../../../../../core/network/base_handling.dart";
+import '../../../../../error/failure.dart';
+import "../../../../../{{name.snakeCase()}}/shared/entity/base_entity.dart";
+import '../../../../../{{name.snakeCase()}}/presentation/domain/use_cases/get_{{name.snakeCase()}}.dart';
+import '../../../../../{{name.snakeCase()}}/presentation/domain/entities/{{name.snakeCase()}}_entity.dart';
+import '../../../../../{{name.snakeCase()}}/presentation/data/models/request/{{name.snakeCase()}}_request_model.dart';
 
 part '{{name.snakeCase()}}_state.dart';
 

@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../core/network/api/network_apis_constants.dart';
-import '../../../../../core/network/base_handling.dart';
-import '../../../../../core/network/network_helper.dart';
-import '../../../../../error/failure.dart';
-import '../../models/request/{{name.snakeCase()}}_request_model.dart';
-import '../../models/response/{{name.snakeCase()}}_response_model.dart';
+import '../../../../../../core/network/api/network_apis_constants.dart';
+import '../../../../../../core/network/base_handling.dart';
+import '../../../../../../core/network/network_helper.dart';
+import '../../../../../../error/failure.dart';
+import '../../../../../../{{name.snakeCase()}}/data/data_sources/models/request/{{name.snakeCase()}}_request_model.dart';
+import '../../../../../../{{name.snakeCase()}}/data/data_sources/models/response/{{name.snakeCase()}}_response_model.dart';
 
 abstract class {{name.pascalCase()}}RemoteDataSource {
   Future<CustomResponseType<{{name.pascalCase()}}ResponseModel>> get{{name.pascalCase()}}(
