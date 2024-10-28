@@ -1,7 +1,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part '{{name.snakeCase()}}_request_model.g.dart';
+part '../../../../data/models/request/{{name.snakeCase()}}_request_model.g.dart';
 
 
   {{#areCommentsOn}}/*

@@ -3,12 +3,12 @@
 
 import 'package:injectable/injectable.dart';
 
-import '../../../../../core/network/base_handling.dart';
-import '../../../../shared/entity/base_entity.dart';
+import '../../../../../../core/network/base_handling.dart';
+import '../../../../../shared/entity/base_entity.dart';
 import '../../domain/repositories/{{name.snakeCase()}}_repository.dart';
 import '../models/request/{{name.snakeCase()}}_request_model.dart';
 import '../models/response/{{name.snakeCase()}}_response_model.dart';
-import '../data_sources/remote/{{name.snakeCase()}}_remote_data_source.dart';
+import '../../../data/data_sources/remote/{{name.snakeCase()}}_remote_data_source.dart';
 
 @Injectable(as: {{name.pascalCase()}}Repository)
 class {{name.pascalCase()}}RepositoryImp implements {{name.pascalCase()}}Repository {
