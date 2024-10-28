@@ -31,11 +31,6 @@ vars:
     description: Name of the feature being generated
     default: home
     prompt: What is the feature name?
-  sub_feature:
-    type: string
-    description: Name of the subd feature being generated
-    default: ""
-    prompt: What is the subd feature name?
   hasLocalData:
     type: boolean
     description: True if the feature has local data
