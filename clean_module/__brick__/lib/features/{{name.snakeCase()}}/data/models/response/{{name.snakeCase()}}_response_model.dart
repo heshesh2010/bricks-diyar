@@ -1,9 +1,9 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import '../../../../shared/entity/base_entity.dart';
-import '{{name.snakeCase()}}_entity.dart';
+import '../../../domain/entities/{{name.snakeCase()}}_entity.dart';
 
-part 'response_model.g.dart';
+part '{{name.snakeCase()}}_response_model.g.dart';
 
 
 
