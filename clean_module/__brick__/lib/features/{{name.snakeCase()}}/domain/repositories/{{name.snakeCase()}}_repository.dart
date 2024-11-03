@@ -1,8 +1,8 @@
 {{#addTemplateCode}}
 
 
-import "../../../../../core/network/base_handling.dart";
-import "../../../../shared/entity/base_entity.dart";
+import "../../../../core/network/base_handling.dart";
+import "../../../shared/entity/base_entity.dart";
 
 import "../../data/models/request/{{name.snakeCase()}}_request_model.dart";
 import "../entities/{{name.snakeCase()}}_entity.dart";

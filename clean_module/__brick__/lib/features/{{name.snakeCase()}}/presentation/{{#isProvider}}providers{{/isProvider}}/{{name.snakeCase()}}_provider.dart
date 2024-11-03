@@ -3,16 +3,16 @@ import "package:flutter/material.dart";
 {{#addTemplateCode}}import "package:internet_connection_checker_plus/internet_connection_checker_plus.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
-import "../../../../../../core/errors/failure.dart";
-import "../../../../../core/adapters/dio_adapter.dart";
-import "../../../../../core/services/connection/network_info.dart";
+import "../../../../../core/errors/failure.dart";
+import "../../../../core/adapters/dio_adapter.dart";
+import "../../../../core/services/connection/network_info.dart";
 
-import "../../../../../{{name.snakeCase()}}/presentation/data/models/request/{{name.snakeCase()}}_params.dart";
-import "../../../../../{{name.snakeCase()}}/presentation/business/entities/{{name.snakeCase()}}_entity.dart";
-import "../../../../../{{name.snakeCase()}}/presentation/business/use_cases/get_{{name.snakeCase()}}.dart";
-{{#hasLocalData}}import "../../../../../{{name.snakeCase()}}/presentation/data/data_sources/local/{{name.snakeCase()}}_local_data_source.dart";{{/hasLocalData}}
-{{#hasRemoteData}}import "../../../../../{{name.snakeCase()}}/presentation/data/data_sources/remote/{{name.snakeCase()}}_remote_data_source.dart";{{/hasRemoteData}}
-import "../../../../../{{name.snakeCase()}}/presentation/data/repositories/{{name.snakeCase()}}_repository_impl.dart";{{/addTemplateCode}}
+import "../../data/models/request/{{name.snakeCase()}}_params.dart";
+import "../../business/entities/{{name.snakeCase()}}_entity.dart";
+import "../../business/use_cases/get_{{name.snakeCase()}}.dart";
+{{#hasLocalData}}import "../../data/data_sources/local/{{name.snakeCase()}}_local_data_source.dart";{{/hasLocalData}}
+{{#hasRemoteData}}import "../../data/data_sources/remote/{{name.snakeCase()}}_remote_data_source.dart";{{/hasRemoteData}}
+import "../../data/repositories/{{name.snakeCase()}}_repository_impl.dart";{{/addTemplateCode}}
 
 class {{name.pascalCase()}}Provider extends ChangeNotifier {
   {{#addTemplateCode}}{{name.pascalCase()}}Entity? {{name.camelCase()}};
