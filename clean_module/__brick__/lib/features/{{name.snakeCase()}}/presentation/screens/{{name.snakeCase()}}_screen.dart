@@ -32,7 +32,7 @@ class _{{name.pascalCase()}}ScreenState extends State<{{name.pascalCase()}}Scree
 
   @override
   Widget build(BuildContext context) {
-    return const MasterWidget(
+    return  MasterWidget(
        screenTitle: context.tr("applicationSettings"),
       widget: Center(
         child: Text('Splash Screen'),
