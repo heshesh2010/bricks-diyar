@@ -3,15 +3,15 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import '../../di/dependency_init.dart';
-import '../../routes/route_sevices.dart';
-import '../../routes/routes.gr.dart';
-import '../cubits/splash_cubit.dart';
+import '../../../di/dependency_init.dart';
+import '../../../routes/route_sevices.dart';
+import '../../../routes/routes.gr.dart';
+import '../cubits/{{name.snakeCase()}}_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../common/extensions/size_extensions.dart';
-import '../../../../shared/widgets/app_text.dart';
-import '../../../../shared/widgets/master_widget.dart';
+import '../../../common/extensions/size_extensions.dart';
+import '../../../shared/widgets/app_text.dart';
+import '../../../shared/widgets/master_widget.dart';
 import 'package:get_it/get_it.dart';
 
 
