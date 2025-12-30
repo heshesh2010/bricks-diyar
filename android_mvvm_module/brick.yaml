@@ -1,0 +1,32 @@
+name: android_mvvm_module
+description: A brick to create Android Kotlin MVVM module with clean architecture
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.51 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: The name of the feature module
+    prompt: What is the name of your feature?
+  hasService:
+    type: boolean
+    description: Include a service layer?
+    default: true
+    prompt: Do you want to include a service layer?
+  hasRepository:
+    type: boolean
+    description: Include a repository layer?
+    default: true
+    prompt: Do you want to include a repository layer?
+  useFlow:
+    type: boolean
+    description: Use Kotlin Flow for reactive programming?
+    default: true
+    prompt: Do you want to use Kotlin Flow?
+  useLiveData:
+    type: boolean
+    description: Use LiveData for observable data?
+    default: false
+    prompt: Do you want to use LiveData instead of Flow?

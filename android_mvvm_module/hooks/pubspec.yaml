@@ -1,0 +1,9 @@
+name: android_mvvm_module_hooks
+description: Hooks for android_mvvm_module brick
+version: 0.1.0+1
+
+environment:
+  sdk: ">=2.19.0 <4.0.0"
+
+dependencies:
+  mason: ^0.1.0-dev.51
