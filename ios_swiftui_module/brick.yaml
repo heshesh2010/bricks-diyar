@@ -1,5 +1,3 @@
 name: ios_swiftui_module
 version: 0.1.0
 description: A SwiftUI MVVM module template for iOS projects.
-authors:
-  - Your Name <your.email@example.com>
