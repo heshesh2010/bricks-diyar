@@ -1,6 +1,10 @@
 name: ios_swiftui_module
 version: 0.1.0
 description: A SwiftUI MVVM module template for iOS projects.
+
+environment:
+  mason: ">=0.1.0-dev.51 <1.0.0"
+
 vars:
   name:
     type: string
