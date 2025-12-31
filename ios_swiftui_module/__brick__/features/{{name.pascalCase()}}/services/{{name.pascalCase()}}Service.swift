@@ -1,13 +1,16 @@
-import Foundation
-import Combine
-
 class {{name.pascalCase()}}Service {
-    func fetchItems() -> AnyPublisher<[{{name.pascalCase()}}], Never> {
-        let items = [
-            {{name.pascalCase()}}(title: "Sample 1", description: "Description 1"),
-            {{name.pascalCase()}}(title: "Sample 2", description: "Description 2")
-        ]
-        return Just(items)
-            .eraseToAnyPublisher()
+    private let network: NetworkHandler
+
+    init(network: NetworkHandler = .shared) {
+        self.network = network
+    }
+
+    func fetchItems(completion: @escaping (Result<[{{name.pascalCase()}}], NetworkErrorHandler>) -> Void) {
+        network.get({{name.pascalCase()}}.self, path: APIConstants.ipEndpoint) { result in
+            switch result {
+                case .success(let item): completion(.success([item]))
+                case .failure(let err): completion(.failure(err))
+            }
+        }
     }
 }

@@ -2,18 +2,43 @@ import SwiftUI
 
 struct {{name.pascalCase()}}ListView: View {
     @StateObject private var viewModel = {{name.pascalCase()}}ViewModel()
-
+    
     var body: some View {
-        NavigationView {
-            List(viewModel.items) { item in
-                NavigationLink(destination: {{name.pascalCase()}}DetailView(item: item)) {
-                    Text(item.title)
+        VStack {
+            switch viewModel.state {
+            case .idle:
+                Text("Press button to load items")
+                    .padding()
+            case .loading:
+                ProgressView("Loading...")
+                    .padding()
+            case .success(let items):
+                List(items) { item in
+                    HStack {
+                        Text("\(item.ip)")
+                        Spacer()
+                        Text(item.userAgent)
+                            .foregroundColor(.gray)
+                            .italic()
+                    }
+                }
+            case .failure(let message):
+                VStack {
+                    Text("Error: \(message)")
+                        .foregroundColor(.red)
+                    Button("Retry") {
+                        viewModel.fetchItems()
+                    }
                 }
             }
-            .navigationTitle("{{name.pascalCase()}} List")
-            .onAppear {
-                viewModel.fetchItems()
-            }
         }
+        .onAppear {
+            viewModel.fetchItems()
+        }
+        .padding()
     }
+}
+
+#Preview {
+    {{name.pascalCase()}}ListView()
 }

@@ -1,16 +1,29 @@
-import Foundation
-import Combine
+import SwiftUI
+
+enum {{name.pascalCase()}}State {
+    case idle
+    case loading
+    case success([{{name.pascalCase()}}])
+    case failure(String)
+}
 
 class {{name.pascalCase()}}ViewModel: ObservableObject {
-    @Published var items: [{{name.pascalCase()}}] = []
-    private let service = {{name.pascalCase()}}Service()
-    private var cancellables = Set<AnyCancellable>()
+    @Published var state: {{name.pascalCase()}}State = .idle
+    private let service: {{name.pascalCase()}}Service
 
+    init(service: {{name.pascalCase()}}Service = {{name.pascalCase()}}Service()) {
+        self.service = service
+    }
+    
     func fetchItems() {
-        service.fetchItems()
-            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] items in
-                self?.items = items
-            })
-            .store(in: &cancellables)
+        self.state = .loading
+        service.fetchItems { [weak self] result in
+            switch result {
+                case .success(let items):
+                    self?.state = .success(items)
+                case .failure(let error):
+                    self?.state = .failure(error.localizedDescription)
+            }
+        }
     }
 }
