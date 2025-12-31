@@ -6,3 +6,4 @@ vars:
     type: string
     description: The feature name
     default: example
+    prompt: What is the feature name?
