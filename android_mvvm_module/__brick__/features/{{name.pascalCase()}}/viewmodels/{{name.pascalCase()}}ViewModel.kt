@@ -1,190 +1,72 @@
 package com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.viewmodels
 
 import androidx.lifecycle.ViewModel
-{{#useFlow}}import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewModelScope
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.core.helpers.Resource
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.core.network.NetworkErrorHandler
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.core.network.NetworkHandler
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.services.{{name.pascalCase()}}Service
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch{{/useFlow}}
-{{#useLiveData}}import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData{{/useLiveData}}
-import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
-{{#hasRepository}}import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.repositories.{{name.pascalCase()}}Repository{{/hasRepository}}
+import kotlinx.coroutines.launch
 
-/**
- * ViewModel for {{name.pascalCase()}}
- */
-class {{name.pascalCase()}}ViewModel(
-    {{#hasRepository}}private val repository: {{name.pascalCase()}}Repository{{/hasRepository}}
-) : ViewModel() {
-    
-    {{#useFlow}}
-    private val _{{name.camelCase()}}List = MutableStateFlow<List<{{name.pascalCase()}}>>(emptyList())
-    val {{name.camelCase()}}List: StateFlow<List<{{name.pascalCase()}}>> = _{{name.camelCase()}}List.asStateFlow()
-    
-    private val _selected{{name.pascalCase()}} = MutableStateFlow<{{name.pascalCase()}}?>(null)
-    val selected{{name.pascalCase()}}: StateFlow<{{name.pascalCase()}}?> = _selected{{name.pascalCase()}}.asStateFlow()
-    
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
-    
-    private val _error = MutableStateFlow<String?>(null)
-    val error: StateFlow<String?> = _error.asStateFlow()
-    
-    fun load{{name.pascalCase()}}List() {
-        viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
-            try {
-                {{#hasRepository}}
-                repository.get{{name.pascalCase()}}List().collect { list ->
-                    _{{name.camelCase()}}List.value = list ?: emptyList()
-                }
-                {{/hasRepository}}
-                {{^hasRepository}}
-                // TODO: Implement data loading
-                {{/hasRepository}}
-            } catch (e: Exception) {
-                _error.value = e.message
-            } finally {
-                _isLoading.value = false
-            }
-        }
+class {{name.pascalCase()}}ViewModel : ViewModel() {
+
+    private val {{name.camelCase()}}Service = NetworkHandler.createService<{{name.pascalCase()}}Service>()
+
+    private val _{{name.camelCase()}}sState = MutableStateFlow<Resource<List<{{name.pascalCase()}}>>>(Resource.Loading())
+    val {{name.camelCase()}}sState: StateFlow<Resource<List<{{name.pascalCase()}}>>> = _{{name.camelCase()}}sState.asStateFlow()
+
+    private val _selected{{name.pascalCase()}}State = MutableStateFlow<Resource<{{name.pascalCase()}}>?>(null)
+    val selected{{name.pascalCase()}}State: StateFlow<Resource<{{name.pascalCase()}}>?> = _selected{{name.pascalCase()}}State.asStateFlow()
+
+    init {
+        get{{name.pascalCase()}}s()
     }
-    
-    fun load{{name.pascalCase()}}ById(id: String) {
+
+    fun get{{name.pascalCase()}}s() {
         viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
+            _{{name.camelCase()}}sState.value = Resource.Loading()
             try {
-                {{#hasRepository}}
-                repository.get{{name.pascalCase()}}ById(id).collect { item ->
-                    _selected{{name.pascalCase()}}.value = item
-                }
-                {{/hasRepository}}
-                {{^hasRepository}}
-                // TODO: Implement data loading
-                {{/hasRepository}}
-            } catch (e: Exception) {
-                _error.value = e.message
-            } finally {
-                _isLoading.value = false
-            }
-        }
-    }
-    
-    fun create{{name.pascalCase()}}({{name.camelCase()}}: {{name.pascalCase()}}) {
-        viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
-            try {
-                {{#hasRepository}}
-                repository.create{{name.pascalCase()}}({{name.camelCase()}}).collect { created ->
-                    created?.let {
-                        load{{name.pascalCase()}}List()
+                val response = {{name.camelCase()}}Service.get{{name.pascalCase()}}s()
+                if (response.isSuccessful) {
+                    response.body()?.let { {{name.camelCase()}}s ->
+                        _{{name.camelCase()}}sState.value = Resource.Success({{name.camelCase()}}s)
+                    } ?: run {
+                        _{{name.camelCase()}}sState.value = Resource.Error("No data available")
                     }
+                } else {
+                    _{{name.camelCase()}}sState.value = Resource.Error("Error: ${response.code()}")
                 }
-                {{/hasRepository}}
-                {{^hasRepository}}
-                // TODO: Implement creation
-                {{/hasRepository}}
             } catch (e: Exception) {
-                _error.value = e.message
-            } finally {
-                _isLoading.value = false
+                _{{name.camelCase()}}sState.value = Resource.Error(NetworkErrorHandler.getErrorMessage(e))
             }
         }
     }
-    
-    fun update{{name.pascalCase()}}(id: String, {{name.camelCase()}}: {{name.pascalCase()}}) {
+
+    fun get{{name.pascalCase()}}ById({{name.camelCase()}}Id: Int) {
         viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
+            _selected{{name.pascalCase()}}State.value = Resource.Loading()
             try {
-                {{#hasRepository}}
-                repository.update{{name.pascalCase()}}(id, {{name.camelCase()}}).collect { updated ->
-                    updated?.let {
-                        load{{name.pascalCase()}}List()
+                val response = {{name.camelCase()}}Service.get{{name.pascalCase()}}ById({{name.camelCase()}}Id)
+                if (response.isSuccessful) {
+                    response.body()?.let { {{name.camelCase()}} ->
+                        _selected{{name.pascalCase()}}State.value = Resource.Success({{name.camelCase()}})
+                    } ?: run {
+                        _selected{{name.pascalCase()}}State.value = Resource.Error("{{name.pascalCase()}} not found")
                     }
+                } else {
+                    _selected{{name.pascalCase()}}State.value = Resource.Error("Error: ${response.code()}")
                 }
-                {{/hasRepository}}
-                {{^hasRepository}}
-                // TODO: Implement update
-                {{/hasRepository}}
             } catch (e: Exception) {
-                _error.value = e.message
-            } finally {
-                _isLoading.value = false
+                _selected{{name.pascalCase()}}State.value = Resource.Error(NetworkErrorHandler.getErrorMessage(e))
             }
         }
     }
-    
-    fun delete{{name.pascalCase()}}(id: String) {
-        viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
-            try {
-                {{#hasRepository}}
-                repository.delete{{name.pascalCase()}}(id).collect { success ->
-                    if (success) {
-                        load{{name.pascalCase()}}List()
-                    }
-                }
-                {{/hasRepository}}
-                {{^hasRepository}}
-                // TODO: Implement deletion
-                {{/hasRepository}}
-            } catch (e: Exception) {
-                _error.value = e.message
-            } finally {
-                _isLoading.value = false
-            }
-        }
+
+    fun clearSelected{{name.pascalCase()}}() {
+        _selected{{name.pascalCase()}}State.value = null
     }
-    {{/useFlow}}
-    {{#useLiveData}}
-    private val _{{name.camelCase()}}List = MutableLiveData<List<{{name.pascalCase()}}>>()
-    val {{name.camelCase()}}List: LiveData<List<{{name.pascalCase()}}>> = _{{name.camelCase()}}List
-    
-    private val _selected{{name.pascalCase()}} = MutableLiveData<{{name.pascalCase()}}?>()
-    val selected{{name.pascalCase()}}: LiveData<{{name.pascalCase()}}?> = _selected{{name.pascalCase()}}
-    
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-    
-    private val _error = MutableLiveData<String?>()
-    val error: LiveData<String?> = _error
-    
-    fun load{{name.pascalCase()}}List() {
-        _isLoading.value = true
-        _error.value = null
-        {{#hasRepository}}
-        val result = repository.get{{name.pascalCase()}}List()
-        result.observeForever { list ->
-            _{{name.camelCase()}}List.value = list ?: emptyList()
-            _isLoading.value = false
-        }
-        {{/hasRepository}}
-        {{^hasRepository}}
-        // TODO: Implement data loading
-        _isLoading.value = false
-        {{/hasRepository}}
-    }
-    
-    fun load{{name.pascalCase()}}ById(id: String) {
-        _isLoading.value = true
-        _error.value = null
-        {{#hasRepository}}
-        val result = repository.get{{name.pascalCase()}}ById(id)
-        result.observeForever { item ->
-            _selected{{name.pascalCase()}}.value = item
-            _isLoading.value = false
-        }
-        {{/hasRepository}}
-        {{^hasRepository}}
-        // TODO: Implement data loading
-        _isLoading.value = false
-        {{/hasRepository}}
-    }
-    {{/useLiveData}}
 }

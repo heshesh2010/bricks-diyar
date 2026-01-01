@@ -2,19 +2,11 @@ package com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{
 
 import com.google.gson.annotations.SerializedName
 
-/**
- * Data model for {{name.pascalCase()}}
- */
 data class {{name.pascalCase()}}(
     @SerializedName("id")
-    val id: String,
-    
+    val id: Int = 0,
     @SerializedName("name")
-    val name: String,
-    
+    val name: String = "",
     @SerializedName("description")
-    val description: String? = null,
-    
-    @SerializedName("created_at")
-    val createdAt: String? = null
+    val description: String = ""
 )
