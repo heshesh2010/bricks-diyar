@@ -1,4 +1,4 @@
-package com.example.features.{{name.snakeCase()}}.models
+package com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.models
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,6 +1,6 @@
-package com.example.features.{{name.snakeCase()}}.repositories
+package com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.repositories
 
-import com.example.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
 {{#useFlow}}import kotlinx.coroutines.flow.Flow{{/useFlow}}
 {{#useLiveData}}import androidx.lifecycle.LiveData{{/useLiveData}}
 

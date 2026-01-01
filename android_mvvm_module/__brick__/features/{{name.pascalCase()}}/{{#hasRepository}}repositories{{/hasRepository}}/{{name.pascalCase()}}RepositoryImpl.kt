@@ -1,7 +1,7 @@
-package com.example.features.{{name.snakeCase()}}.repositories
+package com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.repositories
 
-import com.example.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
-{{#hasService}}import com.example.features.{{name.snakeCase()}}.services.{{name.pascalCase()}}Service{{/hasService}}
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
+{{#hasService}}import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.services.{{name.pascalCase()}}Service{{/hasService}}
 {{#useFlow}}import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow{{/useFlow}}
 {{#useLiveData}}import androidx.lifecycle.LiveData

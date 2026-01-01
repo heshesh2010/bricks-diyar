@@ -1,6 +1,6 @@
-package com.example.features.{{name.snakeCase()}}.services
+package com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.services
 
-import com.example.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
 import retrofit2.http.*
 
 /**

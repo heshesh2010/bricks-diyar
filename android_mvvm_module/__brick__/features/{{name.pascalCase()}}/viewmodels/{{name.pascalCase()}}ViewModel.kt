@@ -1,4 +1,4 @@
-package com.example.features.{{name.snakeCase()}}.viewmodels
+package com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.viewmodels
 
 import androidx.lifecycle.ViewModel
 {{#useFlow}}import androidx.lifecycle.viewModelScope
@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch{{/useFlow}}
 {{#useLiveData}}import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData{{/useLiveData}}
-import com.example.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
-{{#hasRepository}}import com.example.features.{{name.snakeCase()}}.repositories.{{name.pascalCase()}}Repository{{/hasRepository}}
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
+{{#hasRepository}}import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.repositories.{{name.pascalCase()}}Repository{{/hasRepository}}
 
 /**
  * ViewModel for {{name.pascalCase()}}

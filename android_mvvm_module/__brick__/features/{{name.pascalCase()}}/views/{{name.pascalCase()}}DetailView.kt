@@ -1,4 +1,4 @@
-package com.example.features.{{name.snakeCase()}}.views
+package com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 {{#useFlow}}import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch{{/useFlow}}
-import com.example.features.{{name.snakeCase()}}.viewmodels.{{name.pascalCase()}}ViewModel
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.viewmodels.{{name.pascalCase()}}ViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**

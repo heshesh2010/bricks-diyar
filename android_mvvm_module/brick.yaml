@@ -6,6 +6,16 @@ environment:
   mason: ">=0.1.0-dev.51 <1.0.0"
 
 vars:
+  organization:
+    type: string
+    description: The organization domain (e.g., diyarme)
+    default: diyarme
+    prompt: What is your organization domain?
+  projectName:
+    type: string
+    description: The project name (e.g., kcb)
+    default: kcb
+    prompt: What is your project name?
   name:
     type: string
     description: The name of the feature module
