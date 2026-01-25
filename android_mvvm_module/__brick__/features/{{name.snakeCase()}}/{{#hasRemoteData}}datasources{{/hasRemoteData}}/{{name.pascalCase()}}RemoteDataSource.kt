@@ -20,9 +20,9 @@ class {{name.pascalCase()}}RemoteDataSource @Inject constructor(
     /**
      * Fetch {{name.camelCase()}} list from remote API
      */
-    suspend fun fetch{{name.pascalCase()}}s(): Resource<List<{{name.pascalCase()}}>> {
+    suspend fun fetch{{name.pascalCase()}}(): Resource<List<{{name.pascalCase()}}>> {
         return safeApiCall {
-            api.get{{name.pascalCase()}}s()
+            api.get{{name.pascalCase()}}()
         }
     }
 

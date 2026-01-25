@@ -16,8 +16,8 @@ class {{name.pascalCase()}}DataSource @Inject constructor(
     /**
      * Fetch {{name.camelCase()}} list
      */
-    suspend fun fetch{{name.pascalCase()}}s(): Resource<List<{{name.pascalCase()}}>> {
-        {{#hasRemoteData}}return remoteDataSource.fetch{{name.pascalCase()}}s(){{/hasRemoteData}}{{^hasRemoteData}}// TODO: Implement local fetch
+    suspend fun fetch{{name.pascalCase()}}(): Resource<List<{{name.pascalCase()}}>> {
+        {{#hasRemoteData}}return remoteDataSource.fetch{{name.pascalCase()}}(){{/hasRemoteData}}{{^hasRemoteData}}// TODO: Implement local fetch
         return Resource.Error("Not implemented"){{/hasRemoteData}}
     }
 

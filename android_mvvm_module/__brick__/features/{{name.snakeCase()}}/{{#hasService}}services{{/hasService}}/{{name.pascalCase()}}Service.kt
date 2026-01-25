@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface {{name.pascalCase()}}Service {
 
     @GET("{{name.snakeCase()}}")
-    suspend fun get{{name.pascalCase()}}s(): Response<List<{{name.pascalCase()}}>>
+    suspend fun get{{name.pascalCase()}}(): Response<List<{{name.pascalCase()}}>>
 
     @GET("{{name.snakeCase()}}/{id}")
     suspend fun get{{name.pascalCase()}}ById(@Path("id") id: Int): Response<{{name.pascalCase()}}>

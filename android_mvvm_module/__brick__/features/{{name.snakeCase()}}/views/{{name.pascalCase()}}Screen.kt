@@ -14,7 +14,6 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,11 +21,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
-import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.viewmodels.{{name.pascalCase()}}Contract
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.viewmodels.{{name.pascalCase()}}Effect
+import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.viewmodels.{{name.pascalCase()}}Intent
 import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.viewmodels.{{name.pascalCase()}}ViewModel
-import kotlinx.coroutines.flow.collectLatest
 
 /**
  * Main screen for {{name.pascalCase()}} feature
@@ -37,21 +37,21 @@ import kotlinx.coroutines.flow.collectLatest
 fun {{name.pascalCase()}}Screen(
     on{{name.pascalCase()}}Click: ((Int) -> Unit)? = null,
     onBackClick: (() -> Unit)? = null,
-    viewModel: {{name.pascalCase()}}ViewModel = viewModel()
+    viewModel: {{name.pascalCase()}}ViewModel = hiltViewModel()
 ) {
-    val state by viewModel.state.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     // Handle side effects
-    LaunchedEffect(Unit) {
-        viewModel.effect.collectLatest { effect ->
+    LaunchedEffect(viewModel.uiEffect) {
+        viewModel.uiEffect.collect { effect ->
             when (effect) {
-                is {{name.pascalCase()}}Contract.Effect.ShowToast -> {
+                is {{name.pascalCase()}}Effect.ShowToast -> {
                     // Show toast message
                 }
-                is {{name.pascalCase()}}Contract.Effect.Navigate -> {
+                is {{name.pascalCase()}}Effect.Navigate -> {
                     // Handle navigation
                 }
-                is {{name.pascalCase()}}Contract.Effect.NavigateBack -> {
+                is {{name.pascalCase()}}Effect.NavigateBack -> {
                     onBackClick?.invoke()
                 }
             }
@@ -63,14 +63,14 @@ fun {{name.pascalCase()}}Screen(
             TopAppBar(
                 title = { 
                     Text(
-                        text = if (state.selected{{name.pascalCase()}} != null) "{{name.pascalCase()}} Details" else "{{name.pascalCase()}}s",
+                        text = if (uiState.selected{{name.pascalCase()}} != null) "{{name.pascalCase()}} Details" else "{{name.pascalCase()}}s",
                         fontWeight = FontWeight.Bold
                     ) 
                 },
                 navigationIcon = {
-                    if (state.selected{{name.pascalCase()}} != null) {
+                    if (uiState.selected{{name.pascalCase()}} != null) {
                         IconButton(onClick = { 
-                            viewModel.handleIntent({{name.pascalCase()}}Contract.Intent.ClearSelected{{name.pascalCase()}})
+                            viewModel.handleIntent({{name.pascalCase()}}Intent.ClearSelected)
                         }) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
@@ -80,9 +80,9 @@ fun {{name.pascalCase()}}Screen(
                     }
                 },
                 actions = {
-                    if (state.selected{{name.pascalCase()}} == null) {
+                    if (uiState.selected{{name.pascalCase()}} == null) {
                         IconButton(onClick = { 
-                            viewModel.handleIntent({{name.pascalCase()}}Contract.Intent.Refresh)
+                            viewModel.handleIntent({{name.pascalCase()}}Intent.Refresh)
                         }) {
                             Icon(
                                 imageVector = Icons.Default.Refresh,
@@ -106,42 +106,42 @@ fun {{name.pascalCase()}}Screen(
                 .padding(paddingValues)
         ) {
             when {
-                state.isLoading -> {
+                uiState.isLoading -> {
                     CircularProgressIndicator(
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }
-                state.error != null -> {
+                uiState.error != null -> {
                     Column(
                         modifier = Modifier.align(Alignment.Center),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = state.error ?: "An error occurred",
+                            text = uiState.error?.getString() ?: "An error occurred",
                             color = MaterialTheme.colorScheme.error,
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Button(
                             onClick = { 
-                                viewModel.handleIntent({{name.pascalCase()}}Contract.Intent.Refresh)
+                                viewModel.handleIntent({{name.pascalCase()}}Intent.Refresh)
                             }
                         ) {
                             Text("Retry")
                         }
                     }
                 }
-                state.selected{{name.pascalCase()}} != null -> {
+                uiState.selected{{name.pascalCase()}} != null -> {
                     {{name.pascalCase()}}DetailContent(
-                        {{name.camelCase()}} = state.selected{{name.pascalCase()}}!!
+                        {{name.camelCase()}} = uiState.selected{{name.pascalCase()}}!!
                     )
                 }
                 else -> {
                     {{name.pascalCase()}}ListContent(
-                        {{name.camelCase()}}s = state.{{name.camelCase()}}List,
+                        {{name.camelCase()}}s = uiState.{{name.camelCase()}}List,
                         on{{name.pascalCase()}}Click = { {{name.camelCase()}}Id ->
                             on{{name.pascalCase()}}Click?.invoke({{name.camelCase()}}Id)
-                                ?: viewModel.handleIntent({{name.pascalCase()}}Contract.Intent.Select{{name.pascalCase()}}({{name.camelCase()}}Id))
+                                ?: viewModel.handleIntent({{name.pascalCase()}}Intent.Select{{name.pascalCase()}}({{name.camelCase()}}Id))
                         }
                     )
                 }

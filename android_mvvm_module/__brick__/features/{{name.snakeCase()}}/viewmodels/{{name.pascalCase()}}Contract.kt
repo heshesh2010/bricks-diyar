@@ -11,7 +11,7 @@ data class {{name.pascalCase()}}UiState(
 )
 
 sealed interface {{name.pascalCase()}}Intent {
-    object Load{{name.pascalCase()}}s : {{name.pascalCase()}}Intent
+    object Load{{name.pascalCase()}} : {{name.pascalCase()}}Intent
     data class Select{{name.pascalCase()}}(val {{name.camelCase()}}Id: Int) : {{name.pascalCase()}}Intent
     object Refresh : {{name.pascalCase()}}Intent
     object ClearSelected : {{name.pascalCase()}}Intent

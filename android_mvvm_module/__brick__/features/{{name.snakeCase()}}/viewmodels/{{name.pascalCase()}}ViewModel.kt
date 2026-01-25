@@ -19,7 +19,7 @@ class {{name.pascalCase()}}ViewModel @Inject constructor(
 
     override fun handleIntent(intent: {{name.pascalCase()}}Intent) {
         when (intent) {
-            is {{name.pascalCase()}}Intent.Load{{name.pascalCase()}}s -> load{{name.pascalCase()}}s()
+            is {{name.pascalCase()}}Intent.Load{{name.pascalCase()}} -> load{{name.pascalCase()}}()
             is {{name.pascalCase()}}Intent.Select{{name.pascalCase()}} -> load{{name.pascalCase()}}Details(intent.{{name.camelCase()}}Id)
             is {{name.pascalCase()}}Intent.Refresh -> refresh{{name.pascalCase()}}s()
             is {{name.pascalCase()}}Intent.ClearSelected -> setState { copy(selected{{name.pascalCase()}} = null) }
@@ -27,9 +27,9 @@ class {{name.pascalCase()}}ViewModel @Inject constructor(
         }
     }
 
-    private fun load{{name.pascalCase()}}s() {
+    private fun load{{name.pascalCase()}}() {
         safeCall(
-            suspendCall = { {{name.camelCase()}}DataSource.fetch{{name.pascalCase()}}s() },
+            suspendCall = { {{name.camelCase()}}DataSource.fetch{{name.pascalCase()}}() },
             onLoading = { setState { copy(isLoading = true) } },
             onSuccess = { result ->
                 setState { copy(isLoading = false, {{name.camelCase()}}List = result ?: emptyList(), error = null) }
@@ -55,7 +55,7 @@ class {{name.pascalCase()}}ViewModel @Inject constructor(
         )
     }
 
-    private fun refresh{{name.pascalCase()}}s() {
-        load{{name.pascalCase()}}s()
+    private fun refresh{{name.pascalCase()}}() {
+        load{{name.pascalCase()}}()
     }
 }
