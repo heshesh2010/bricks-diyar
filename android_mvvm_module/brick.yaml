@@ -8,13 +8,13 @@ environment:
 vars:
   organization:
     type: string
-    description: The organization domain (e.g., diyarme)
-    default: diyarme
+    description: The organization domain (e.g., kcb)
+    default: kcb
     prompt: What is your organization domain?
   projectName:
     type: string
-    description: The project name (e.g., kcb)
-    default: kcb
+    description: The project name (e.g., community)
+    default: community
     prompt: What is your project name?
   name:
     type: string
@@ -25,11 +25,6 @@ vars:
     description: Include a service layer?
     default: true
     prompt: Do you want to include a service layer?
-  hasRepository:
-    type: boolean
-    description: Include a repository layer?
-    default: true
-    prompt: Do you want to include a repository layer?
   hasLocalData:
     type: boolean
     description: Include a local data source?
@@ -40,13 +35,3 @@ vars:
     description: Include a remote data source?
     default: true
     prompt: Do you want to include a remote data source?
-  useFlow:
-    type: boolean
-    description: Use Kotlin Flow for reactive programming?
-    default: true
-    prompt: Do you want to use Kotlin Flow?
-  useLiveData:
-    type: boolean
-    description: Use LiveData for observable data?
-    default: false
-    prompt: Do you want to use LiveData instead of Flow?
