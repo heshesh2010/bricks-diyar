@@ -12,14 +12,5 @@ void run(HookContext context) {
     throw Exception('Feature name is required');
   }
   
-  // Check for conflicting options
-  final useFlow = context.vars['useFlow'] as bool;
-  final useLiveData = context.vars['useLiveData'] as bool;
-  
-  if (useFlow && useLiveData) {
-    logger.warn('Both Flow and LiveData are enabled. Flow will be used by default.');
-    context.vars['useLiveData'] = false;
-  }
-  
   logger.success('Pre-generation checks passed ✓');
 }
