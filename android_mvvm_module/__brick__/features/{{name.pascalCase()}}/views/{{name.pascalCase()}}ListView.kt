@@ -29,7 +29,7 @@ import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{n
 @Composable
 fun {{name.pascalCase()}}ListView(
     on{{name.pascalCase()}}Click: (Int) -> Unit,
-    viewModel: {{name.pascalCase()}}ViewModel = viewModel()
+    viewModel: {{name.pascalCase()}}ViewModel = viewModel<{{name.pascalCase()}}ViewModel>()
 ) {
     val {{name.camelCase()}}sState by viewModel.{{name.camelCase()}}sState.collectAsState()
 

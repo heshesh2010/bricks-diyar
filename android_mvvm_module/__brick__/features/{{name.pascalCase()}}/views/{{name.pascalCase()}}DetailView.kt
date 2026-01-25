@@ -28,7 +28,7 @@ import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{n
 fun {{name.pascalCase()}}DetailView(
     {{name.camelCase()}}Id: Int,
     onBackClick: () -> Unit,
-    viewModel: {{name.pascalCase()}}ViewModel = viewModel()
+    viewModel: {{name.pascalCase()}}ViewModel = viewModel<{{name.pascalCase()}}ViewModel>()
 ) {
     val {{name.camelCase()}}State by viewModel.selected{{name.pascalCase()}}State.collectAsState()
 

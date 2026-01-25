@@ -30,6 +30,16 @@ vars:
     description: Include a repository layer?
     default: true
     prompt: Do you want to include a repository layer?
+  hasLocalData:
+    type: boolean
+    description: Include a local data source?
+    default: false
+    prompt: Do you want to include a local data source?
+  hasRemoteData:
+    type: boolean
+    description: Include a remote data source?
+    default: true
+    prompt: Do you want to include a remote data source?
   useFlow:
     type: boolean
     description: Use Kotlin Flow for reactive programming?
