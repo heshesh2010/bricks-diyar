@@ -21,7 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.models.{{name.pascalCase()}}
 import com.{{organization.snakeCase()}}.{{projectName.snakeCase()}}.features.{{name.snakeCase()}}.viewmodels.{{name.pascalCase()}}Effect
@@ -152,16 +152,16 @@ fun {{name.pascalCase()}}Screen(
 
 @Composable
 private fun {{name.pascalCase()}}ListContent(
-    {{name.camelCase()}}s: List<{{name.pascalCase()}}>,
+    {{name.camelCase()}}: List<{{name.pascalCase()}}>,
     on{{name.pascalCase()}}Click: (Int) -> Unit
 ) {
-    if ({{name.camelCase()}}s.isEmpty()) {
+    if ({{name.camelCase()}}.isEmpty()) {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "No {{name.camelCase()}}s available",
+                text = "No {{name.camelCase()}} available",
                 style = MaterialTheme.typography.bodyLarge
             )
         }
@@ -171,7 +171,7 @@ private fun {{name.pascalCase()}}ListContent(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items({{name.camelCase()}}s) { {{name.camelCase()}} ->
+            items({{name.camelCase()}}) { {{name.camelCase()}} ->
                 {{name.pascalCase()}}ListItem(
                     {{name.camelCase()}} = {{name.camelCase()}},
                     onClick = { on{{name.pascalCase()}}Click({{name.camelCase()}}.id) }
@@ -221,7 +221,7 @@ private fun {{name.pascalCase()}}ListItem(
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow =   TextOverflow.Ellipsis
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(

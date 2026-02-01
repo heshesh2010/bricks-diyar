@@ -25,40 +25,4 @@ class {{name.pascalCase()}}RemoteDataSource @Inject constructor(
             api.get{{name.pascalCase()}}()
         }
     }
-
-    /**
-     * Fetch {{name.camelCase()}} by ID from remote API
-     */
-    suspend fun fetch{{name.pascalCase()}}ById({{name.camelCase()}}Id: Int): Resource<{{name.pascalCase()}}> {
-        return safeApiCall {
-            api.get{{name.pascalCase()}}ById({{name.camelCase()}}Id)
-        }
-    }
-
-    /**
-     * Create new {{name.camelCase()}} on remote API
-     */
-    suspend fun create{{name.pascalCase()}}({{name.camelCase()}}: {{name.pascalCase()}}): Resource<{{name.pascalCase()}}> {
-        return safeApiCall {
-            api.create{{name.pascalCase()}}({{name.camelCase()}})
-        }
-    }
-
-    /**
-     * Update existing {{name.camelCase()}} on remote API
-     */
-    suspend fun update{{name.pascalCase()}}({{name.camelCase()}}Id: Int, {{name.camelCase()}}: {{name.pascalCase()}}): Resource<{{name.pascalCase()}}> {
-        return safeApiCall {
-            api.update{{name.pascalCase()}}({{name.camelCase()}}Id, {{name.camelCase()}})
-        }
-    }
-
-    /**
-     * Delete {{name.camelCase()}} from remote API
-     */
-    suspend fun delete{{name.pascalCase()}}({{name.camelCase()}}Id: Int): Resource<Unit> {
-        return safeApiCall {
-            api.delete{{name.pascalCase()}}({{name.camelCase()}}Id)
-        }
-    }
 }
